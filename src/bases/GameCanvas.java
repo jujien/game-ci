@@ -1,18 +1,14 @@
 package bases;
 
+import bases.game.background.Background;
 import bases.game.player.Player;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class GameCanvas extends JPanel {
-    BufferedImage background;
+    Background background;
     Player player;
     BufferedImage backBufferImage;
     Graphics2D backBufferGraphic2D;
@@ -32,22 +28,20 @@ public class GameCanvas extends JPanel {
     public void render() {
         this.backBufferGraphic2D.setColor(Color.BLACK);
         this.backBufferGraphic2D.fillRect(0, 0, this.getWidth(), this.getHeight());
-        this.backBufferGraphic2D.drawImage(this.background, 0, 0, null);
-        this.player.render(this.backBufferGraphic2D);
+        GameObject.renderAll(this.backBufferGraphic2D);
         this.repaint();
     }
 
     private void setupPlayer() {
         this.player = new Player();
         this.player.position.set(192.0f, 500.0f);
+        GameObject.add(this.player);
     }
 
     private void setupBackgroundImage() {
-        try {
-            this.background = ImageIO.read(new File("assets/images/background/0.png"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        this.background = new Background();
+        this.background.position.x = 384.0f / 2.0f;
+        GameObject.add(this.background);
     }
 
     @Override
@@ -56,6 +50,6 @@ public class GameCanvas extends JPanel {
     }
 
     public void run() {
-        this.player.run();
+        GameObject.runAll();
     }
 }
