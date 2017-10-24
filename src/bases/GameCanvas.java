@@ -1,6 +1,8 @@
 package bases;
 
 import bases.game.background.Background;
+import bases.game.enemy.Enemy;
+import bases.game.enemy.EnemySpawner;
 import bases.game.player.Player;
 
 import javax.swing.*;
@@ -10,6 +12,7 @@ import java.awt.image.BufferedImage;
 public class GameCanvas extends JPanel {
     Background background;
     Player player;
+    EnemySpawner enemySpawner;
     BufferedImage backBufferImage;
     Graphics2D backBufferGraphic2D;
 
@@ -18,6 +21,7 @@ public class GameCanvas extends JPanel {
         this.setBackground(Color.BLACK);
         this.setupBackgroundImage();
         this.setupPlayer();
+        this.setupEnemy();
     }
 
     private void setupBackBuffer() {
@@ -36,6 +40,11 @@ public class GameCanvas extends JPanel {
         this.player = new Player();
         this.player.position.set(192.0f, 500.0f);
         GameObject.add(this.player);
+    }
+
+    private void setupEnemy() {
+        this.enemySpawner = new EnemySpawner();
+        GameObject.add(this.enemySpawner);
     }
 
     private void setupBackgroundImage() {
