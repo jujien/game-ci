@@ -20,6 +20,6 @@ public class ImageRenderer implements Renderer {
 
     @Override
     public void render(Graphics2D graphics, Vector2D position) {
-        graphics.drawImage(this.image, (int)position.x, (int)position.y, null);
+        graphics.drawImage(this.image, (int)(position.x - this.image.getWidth() / 2.0), (int) (position.y - this.image.getHeight() / 2.0), null);
     }
 }
