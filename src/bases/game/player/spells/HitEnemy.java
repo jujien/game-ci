@@ -10,7 +10,7 @@ public class HitEnemy {
         BoxCollider boxCollider = playerSpell.boxCollider;
         Enemy enemy = GameObject.checkCollide(boxCollider, Enemy.class);
         if (enemy != null) {
-            enemy.isActive = false;
+            enemy.getHit();
             playerSpell.isActive = false;
         }
     }

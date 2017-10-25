@@ -1,15 +1,22 @@
 package bases.game.player.spells;
 
 import bases.GameObject;
+import bases.Utils;
 import bases.game.physics.BoxCollider;
-import bases.renderes.ImageRenderer;
+import bases.renderes.Animation;
 
 public class PlayerSpell extends GameObject {
     public BoxCollider boxCollider;
     HitEnemy hitEnemy;
 
     public PlayerSpell() {
-        this.renderer = new ImageRenderer("assets/images/player-spells/a/0.png");
+        this.renderer = new Animation(3,
+                Utils.loadImage("assets/images/player-spells/a/0.png"),
+                Utils.loadImage("assets/images/player-spells/a/1.png"),
+                Utils.loadImage("assets/images/player-spells/a/2.png"),
+                Utils.loadImage("assets/images/player-spells/a/3.png")
+                );
+
         this.boxCollider = new BoxCollider(20, 20);
         this.hitEnemy = new HitEnemy();
     }

@@ -7,7 +7,7 @@ import bases.game.enemy.bullet.Bullet;
 public class EnemyShoot {
     private boolean disabled;
     private FrameCounter frameCounter;
-    private final int MAX_COUNT = 30;
+    private final int MAX_COUNT = 7;
 
     public EnemyShoot() {
         this.frameCounter = new FrameCounter(this.MAX_COUNT);
