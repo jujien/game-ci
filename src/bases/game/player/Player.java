@@ -1,16 +1,17 @@
 package bases.game.player;
 
 import bases.GameObject;
-import bases.renderes.ImageRenderer;
 
 public class Player extends GameObject {
 
     PlayerMove playerMove;
     PlayerConstraints playerConstraints;
     PlayerShoot playerShoot;
+    PlayerAnimator playerAnimator;
 
     public Player() {
-        this.renderer = new ImageRenderer("assets/images/players/straight/0.png");
+        this.playerAnimator = new PlayerAnimator();
+        this.renderer = this.playerAnimator;
         this.playerMove = new PlayerMove();
         this.playerConstraints = new PlayerConstraints();
         this.playerShoot = new PlayerShoot();
@@ -22,5 +23,6 @@ public class Player extends GameObject {
         this.playerMove.run(this);
         this.playerShoot.run(this);
         this.playerConstraints.run(this);
+        this.playerAnimator.run(this);
     }
 }
