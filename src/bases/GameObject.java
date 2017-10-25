@@ -85,4 +85,8 @@ public class GameObject {
     public static void add(GameObject gameObject) {
         newGameObject.add(gameObject);
     }
+
+    public static void clear() {
+        gameObjects.clear();
+    }
 }

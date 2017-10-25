@@ -1,6 +1,7 @@
 package bases.game.player;
 
 import bases.GameObject;
+import bases.game.physics.BoxCollider;
 
 public class Player extends GameObject {
 
@@ -8,6 +9,8 @@ public class Player extends GameObject {
     PlayerConstraints playerConstraints;
     PlayerShoot playerShoot;
     PlayerAnimator playerAnimator;
+    BoxCollider boxCollider;
+    HitPlayer hitPlayer;
 
     public Player() {
         this.playerAnimator = new PlayerAnimator();
@@ -15,6 +18,8 @@ public class Player extends GameObject {
         this.playerMove = new PlayerMove();
         this.playerConstraints = new PlayerConstraints();
         this.playerShoot = new PlayerShoot();
+        this.boxCollider = new BoxCollider(8, 8);
+        this.hitPlayer = new HitPlayer();
     }
 
     @Override
@@ -24,5 +29,7 @@ public class Player extends GameObject {
         this.playerShoot.run(this);
         this.playerConstraints.run(this);
         this.playerAnimator.run(this);
+        this.boxCollider.position = this.position;
+        this.hitPlayer.run(this);
     }
 }

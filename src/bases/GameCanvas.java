@@ -1,9 +1,10 @@
 package bases;
 
 import bases.game.background.Background;
-import bases.game.enemy.Enemy;
 import bases.game.enemy.EnemySpawner;
 import bases.game.player.Player;
+import bases.game.scenes.GamePlayScene;
+import bases.game.scenes.SceneManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,16 +13,18 @@ import java.awt.image.BufferedImage;
 public class GameCanvas extends JPanel {
     Background background;
     Player player;
-    EnemySpawner enemySpawner;
     BufferedImage backBufferImage;
     Graphics2D backBufferGraphic2D;
 
     public GameCanvas() {
         this.setupBackBuffer();
         this.setBackground(Color.BLACK);
-        this.setupBackgroundImage();
-        this.setupPlayer();
-        this.setupEnemy();
+        this.setupFistScene();
+
+    }
+
+    private void setupFistScene() {
+        SceneManager.changeScene(new GamePlayScene());
     }
 
     private void setupBackBuffer() {
@@ -36,22 +39,7 @@ public class GameCanvas extends JPanel {
         this.repaint();
     }
 
-    private void setupPlayer() {
-        this.player = new Player();
-        this.player.position.set(192.0f, 500.0f);
-        GameObject.add(this.player);
-    }
 
-    private void setupEnemy() {
-        this.enemySpawner = new EnemySpawner();
-        GameObject.add(this.enemySpawner);
-    }
-
-    private void setupBackgroundImage() {
-        this.background = new Background();
-        this.background.position.x = 384.0f / 2.0f;
-        GameObject.add(this.background);
-    }
 
     @Override
     protected void paintComponent(Graphics g) {
@@ -60,5 +48,6 @@ public class GameCanvas extends JPanel {
 
     public void run() {
         GameObject.runAll();
+        SceneManager.performChangeSceneIfNeeded();
     }
 }
