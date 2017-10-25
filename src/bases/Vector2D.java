@@ -72,7 +72,8 @@ public class Vector2D {
     }
 
     public Vector2D normalize() {
-        return new Vector2D(1.0f, 1.0f);
+        float lenght = this.lenght();
+        return new Vector2D(this.x / lenght, this.y / lenght);
     }
 
     public float lenght() {

@@ -2,6 +2,7 @@ package bases;
 
 import bases.game.enemy.Enemy;
 import bases.game.physics.BoxCollider;
+import bases.game.physics.PhysicsBody;
 import bases.renderes.Renderer;
 
 import java.awt.*;
@@ -9,13 +10,14 @@ import java.util.Vector;
 
 public class GameObject {
 
-    public static Enemy checkCollide(BoxCollider boxCollider) {
+    public static <T extends PhysicsBody> T checkCollide(BoxCollider boxCollider, Class<T> cls) {
         for (GameObject gameObject: gameObjects) {
-            if (gameObject.isActive && gameObject instanceof Enemy) {
-                Enemy enemy = (Enemy) gameObject;
-                if (enemy.boxCollider.collideWith(boxCollider)) {
-                    return enemy;
-                }
+            if (!gameObject.isActive) continue;
+            if (!(gameObject instanceof PhysicsBody)) continue;
+            if (!(gameObject.getClass().equals(cls))) continue;
+            BoxCollider otherBoxCollide = ((PhysicsBody) gameObject).getBoxCollider();
+            if (boxCollider.collideWith(otherBoxCollide)) {
+                return (T) gameObject;
             }
         }
         return null;
