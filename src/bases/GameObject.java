@@ -1,8 +1,8 @@
 package bases;
 
-import bases.game.enemy.Enemy;
 import bases.game.physics.BoxCollider;
 import bases.game.physics.PhysicsBody;
+import bases.game.player.spells.PlayerSpell;
 import bases.renderes.Renderer;
 
 import java.awt.*;
@@ -21,6 +21,25 @@ public class GameObject {
             }
         }
         return null;
+    }
+
+    public static <T extends GameObject> T recycle(Class<T> cls) {
+        for (GameObject gameObject: gameObjects) {
+            if (gameObject.isActive) continue;
+            if (!(gameObject.getClass().equals(cls))) continue;
+            gameObject.isActive = true;
+            return (T) gameObject;
+        }
+        T gameObject = null;
+        try {
+            gameObject = cls.newInstance();
+            gameObject.isActive = true;
+            add(gameObject);
+            return gameObject;
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     private static Vector<GameObject> gameObjects = new Vector<>();

@@ -19,7 +19,7 @@ public class Enemy extends GameObject implements PhysicsBody {
     public void run() {
         super.run();
         this.position.addUp(0, 0.5f);
-        this.enemyShoot.run(this);
+        //this.enemyShoot.run(this);
         this.boxCollider.position.set(this.position);
     }
 

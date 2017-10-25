@@ -18,11 +18,17 @@ public class EnemySpawner extends GameObject {
         super.run();
         if (this.frameCounter.run()) {
             this.frameCounter.reset();
-            Enemy enemy = new Enemy();
+            this.deactiveIfNeeaded();
+            Enemy enemy = GameObject.recycle(Enemy.class);
             enemy.position.y = 0;
             enemy.position.x = (new Random()).nextInt(384);
-            GameObject.add(enemy);
         }
 
+    }
+
+    private void deactiveIfNeeaded() {
+        if (this.position.y > 600) {
+            this.isActive = false;
+        }
     }
 }

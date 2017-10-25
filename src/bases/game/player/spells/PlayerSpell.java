@@ -20,5 +20,12 @@ public class PlayerSpell extends GameObject {
         this.position.subtractBy(0, 10);
         this.boxCollider.position.set(this.position);
         this.hitEnemy.run(this);
+        this.deactiveIfNeeded();
+    }
+
+    private void deactiveIfNeeded() {
+        if (this.position.y < 0) {
+            this.isActive = false;
+        }
     }
 }

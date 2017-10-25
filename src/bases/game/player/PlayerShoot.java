@@ -26,9 +26,8 @@ public class PlayerShoot {
             return;
         }
         if (instance.xPressed) {
-            PlayerSpell playerSpell = new PlayerSpell();
+            PlayerSpell playerSpell = GameObject.recycle(PlayerSpell.class);
             playerSpell.position.set(player.position.subtract(0, 5));
-            GameObject.add(playerSpell);
             this.disabled = true;
         }
     }
